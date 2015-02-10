@@ -22,6 +22,7 @@ end
 numCellsX = imageWidth / cellWidth;
 numCellsY = imageHeight / cellHeight;
 ManualClassification = zeros(numCellsX, numCellsY);
+PatchHandles = zeros(numCellsX, numCellsY);
 
 I(256:256:end,:,:) = 0;
 I(:,256:256:end,:) = 0;
@@ -35,18 +36,24 @@ while 1 == 1
     if(button == 1)
         xCell = uint32(floor(x / cellWidth));
         yCell = uint32(floor(y / cellHeight));
-        ManualClassification(yCell + 1, xCell + 1) = 1;
-        
-        xPlot = xCell * cellWidth;
-        yPlot = yCell * cellHeight;
-        
-        tl = [xPlot, yPlot];
-        bl = [xPlot, yPlot + cellHeight];
-        tr = [xPlot + cellWidth, yPlot];
-        br = [xPlot + cellWidth, yPlot + cellHeight];
-        
-        p=patch([tl(1) bl(1) br(1) tr(1)],[tl(2) bl(2) br(2) tr(2)],'red');
-        set(p,'FaceAlpha',0.2);
+            
+        if(ManualClassification(yCell + 1, xCell + 1) == 0)
+            ManualClassification(yCell + 1, xCell + 1) = 1;
+
+            xPlot = xCell * cellWidth;
+            yPlot = yCell * cellHeight;
+
+            tl = [xPlot, yPlot];
+            bl = [xPlot, yPlot + cellHeight];
+            tr = [xPlot + cellWidth, yPlot];
+            br = [xPlot + cellWidth, yPlot + cellHeight];
+
+            PatchHandles(yCell + 1, xCell + 1) = patch([tl(1) bl(1) br(1) tr(1)],[tl(2) bl(2) br(2) tr(2)],'red', 'FaceAlpha', 0.2);
+            set(PatchHandles(yCell + 1, xCell + 1));
+        else
+            ManualClassification(yCell + 1, xCell + 1) = 0;
+            delete(PatchHandles(yCell + 1, xCell + 1));
+        end
         
     else
         break
