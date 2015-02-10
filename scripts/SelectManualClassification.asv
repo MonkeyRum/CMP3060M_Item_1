@@ -1,16 +1,12 @@
 function [ ManualClassification ] = SelectManualClassification( imageFilename, cellWidth, cellHeight, outDir )
 %SELECTMANUALCLASSIFICATION Manually select good/bad cells within the input image
-%   imageFile   - file name of image
-%   cellWidth   - width of patches
-%   cellHeight  - height of patches
-%   outDir      - manual classification result output directory
+%   imageFile 
 
 I = imread(imageFilename);
 imageSize = size(I);
 imageWidth = imageSize(1);
 imageHeight = imageSize(2);
 
-% Ignoring outlying cells is not implemented but might be in the future
 if(mod(imageWidth, cellWidth) ~= 0)
     warning('Image width is not equally divisible by the cell width, outlying cells will be ignored')
 end
@@ -55,9 +51,7 @@ end
 
 close(f);
 
-[~, name, ~] = fileparts(imageFilename);
-outFile = strcat(outDir, name, '_manualClassification.csv');
-csvwrite(outFile, ManualClassification);
-disp(strcat('Wrote manual classification file: ', outFile));
+[pathstr,name,ext] = fileparts(imageFilename);
+csvwrite(strcat(outDir, name, '_manualClassification.csv'), ManualClassification, 0,2)
 
 end
