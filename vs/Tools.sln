@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Set", "Set\Set.csproj", "{3DCEB068-EF97-414C-BA4F-9DA611FA2FDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plot", "..\Plot\Plot.csproj", "{59F9E015-DDF7-4DE8-8BD6-F5A75DB90E91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Select", "Select\Select.csproj", "{48BB0011-B298-4E63-9202-E6984EFAD863}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{3DCEB068-EF97-414C-BA4F-9DA611FA2FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DCEB068-EF97-414C-BA4F-9DA611FA2FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DCEB068-EF97-414C-BA4F-9DA611FA2FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59F9E015-DDF7-4DE8-8BD6-F5A75DB90E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59F9E015-DDF7-4DE8-8BD6-F5A75DB90E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59F9E015-DDF7-4DE8-8BD6-F5A75DB90E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59F9E015-DDF7-4DE8-8BD6-F5A75DB90E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48BB0011-B298-4E63-9202-E6984EFAD863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48BB0011-B298-4E63-9202-E6984EFAD863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48BB0011-B298-4E63-9202-E6984EFAD863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48BB0011-B298-4E63-9202-E6984EFAD863}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

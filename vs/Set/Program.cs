@@ -11,6 +11,8 @@ namespace Set
     {
         static void Main(string[] args)
         {
+            // Probably the most fragile code ever...
+
             List<string> goodFilepaths = new List<string>();
             List<string> badFilepaths = new List<string>();
             string manualClassificationFolder = args[0];
@@ -47,7 +49,7 @@ namespace Set
 
             // remove trailing comma
             trainingCsv = trainingCsv.Substring(0, trainingCsv.Length - 1);
-            testingCsv = testingCsv.Substring(0, trainingCsv.Length - 1);
+            testingCsv = testingCsv.Substring(0, testingCsv.Length - 1);
 
             WriteCsv(outputFolder + @"\training.csv", ref trainingCsv);
             WriteCsv(outputFolder + @"\testing.csv", ref testingCsv);
@@ -55,7 +57,7 @@ namespace Set
 
         private static void SplitIntoSets(List<string> paths, ref string trainingCsv, ref string testingCsv, string suffix, string imageType)
         {
-            int mid = paths.Count / 2;
+            int mid = (paths.Count / 3) * 2;
 
             for (int i = 0; i < paths.Count; ++i)
             {
