@@ -13,6 +13,14 @@ function [ M1, M2 ] = RemoveColumns( mx1, mx2, my1, my2 )
 M1(:,C) = [];
 M2(:,C) = [];
 
+% remove any columns with nan
+[~,c1]=find(isnan(M1));
+[~,c2]=find(isnan(M1));
+c = [c1;c2];
+c = unique(c);
+M1(:,c) = [];
+M2(:,c) = [];
+
 end
 
 function [ C ] = GetNonPositiveClassVarianceCols(mx1, my1)
