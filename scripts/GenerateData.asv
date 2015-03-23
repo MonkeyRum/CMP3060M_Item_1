@@ -20,6 +20,12 @@ funs = {
             @(block_struct) max(max(double(block_struct.data)))
     };
 
+numFuns = size(funs);
+numFuns = numFuns(2);
+
+regex = ',';
+replace = '.';
+
 for i=1:numFiles
     
     name = filenames{1, i};
@@ -39,14 +45,22 @@ for i=1:numFiles
     images = {IR IG IB IGray IH IS IV};
     tags = {'RED' 'GREEN' 'BLUE' 'GRAY' 'HUE' 'SAT' 'INT'};
     
-    for j=1:length(funs)
+    for j=1:numFuns
         
         fun = funs{j};
         filename = filenames{i};
         
         for k=1:length(images)
-            process_image_fun(images{k}, filename, tags{k}, fun, outDir, w, h);
+            process_image_fun(IR, filename, 'RED', fun, outDir, w, h);
         end
+        
+        process_image_fun(IR, filename, 'RED', fun, outDir, w, h);
+        process_image_fun(IG, filename, 'GREEN', fun, outDir, w, h);
+        process_image_fun(IB, filename, 'BLUE', fun, outDir, w, h);
+        process_image_fun(IGray, filename, 'GRAY', fun, outDir, w, h);
+        process_image_fun(IH, filename, 'HUE', fun, outDir, w, h);
+        process_image_fun(IS, filename, 'SAT', fun, outDir, w, h);
+        process_image_fun(IV, filename, 'INT', fun, outDir, w, h);
         
     end
     
