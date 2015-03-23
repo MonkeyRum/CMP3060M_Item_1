@@ -9,16 +9,27 @@ namespace Set
 {
     class Program
     {
+        static string label_path = @"C:\DATA\class labels";
+        static string data_path = @"C:\DATA\discriminants";
+        static string output_folder = @"C:\DATA\working set\";
+
+        static string testing_labels_csv = output_folder + @"testing_labels.csv";
+        static string training_labels_csv = output_folder + @"training_labels.csv";
+        static string testing_data_csv = output_folder + @"testing_data.csv";
+        static string training_data_csv = output_folder + @"training_data.csv";
+        
+        static string image_type = "jpg";
+        static string suffix = "_manualClassification.csv";
+
         static void Main(string[] args)
         {
             // Probably the most fragile code ever...
 
             List<string> goodFilepaths = new List<string>();
             List<string> badFilepaths = new List<string>();
-            string manualClassificationFolder = args[0];
-            string outputFolder = args[1];
-            string suffix = args[2];
-            string imageType = args[3];
+            string manualClassificationFolder = label_path;
+            string outputFolder = output_folder;
+            string imageType = image_type;
 
             string[] filePaths = Directory.GetFiles(manualClassificationFolder);
 
@@ -30,7 +41,7 @@ namespace Set
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
-                    if (line.Contains("1"))
+                    if (line.Contains("1") || line.Contains("2") || line.Contains("3"))
                     {
                         isBad = true;
                         break;
@@ -83,8 +94,6 @@ namespace Set
 
         private static void BuildLabelTestCsv(string testing_csv)
         {
-            string label_path = @"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\ManualClassification\Alex2";
-
             string[] files = testing_csv.Split(',');
             RemoveExtensions(ref files);
 
@@ -112,13 +121,11 @@ namespace Set
 
             csvOut = csvOut.Substring(0, csvOut.Length - 1);
 
-            WriteCsv(@"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\WORKING_SET\testing_labels.csv", ref csvOut);
+            WriteCsv(testing_labels_csv, ref csvOut);
         }
 
         private static void BuildLabelTrainCsv(string training_csv)
         {
-            string label_path = @"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\ManualClassification\Alex2";
-
             string[] files = training_csv.Split(',');
             RemoveExtensions(ref files);
 
@@ -146,17 +153,15 @@ namespace Set
 
             csvOut = csvOut.Substring(0, csvOut.Length - 1);
 
-            WriteCsv(@"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\WORKING_SET\training_labels.csv", ref csvOut);
+            WriteCsv(training_labels_csv, ref csvOut);
         }
 
         private static void BuildDiscrimTestCsv(string testing_csv)
         {
-            string label_path = @"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\FeatureData\256";
-
             string[] files = testing_csv.Split(',');
             RemoveExtensions(ref files);
 
-            string[] filePaths = Directory.GetFiles(label_path);
+            string[] filePaths = Directory.GetFiles(data_path);
             List<string> acceptedFilesPaths = new List<string>();
 
             foreach (var str in filePaths)
@@ -180,17 +185,15 @@ namespace Set
 
             csvOut = csvOut.Substring(0, csvOut.Length - 1);
 
-            WriteCsv(@"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\WORKING_SET\testing_data.csv", ref csvOut);
+            WriteCsv(testing_data_csv, ref csvOut);
         }
 
         private static void BuildDiscrimTrainCsv(string training_csv)
         {
-            string label_path = @"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\FeatureData\256";
-
             string[] files = training_csv.Split(',');
             RemoveExtensions(ref files);
 
-            string[] filePaths = Directory.GetFiles(label_path);
+            string[] filePaths = Directory.GetFiles(data_path);
             List<string> acceptedFilesPaths = new List<string>();
 
             foreach (var str in filePaths)
@@ -214,7 +217,7 @@ namespace Set
 
             csvOut = csvOut.Substring(0, csvOut.Length - 1);
 
-            WriteCsv(@"C:\Users\Alex\Dropbox\CMP3060M\ImageDataSet\WORKING_SET\training_data.csv", ref csvOut);
+            WriteCsv(training_data_csv, ref csvOut);
         }
 
         private static void RemoveExtensions(ref string[] path)
